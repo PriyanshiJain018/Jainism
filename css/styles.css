@@ -571,3 +571,342 @@ body {
     font-size: 1.2rem;
     padding: 0.25rem;
 }
+/* =================================================================
+   KARMA LEARNING STYLES - ADD AT END OF FILE
+   ================================================================= */
+
+/* Karma Learning Interface */
+.karma-learning {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.karma-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #9370DB, #8A2BE2);
+    color: white;
+    border-radius: 12px;
+}
+
+.karma-header h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.karma-header p {
+    opacity: 0.9;
+    font-size: 1.1rem;
+}
+
+.back-button {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    transition: background 0.3s ease;
+}
+
+.back-button:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Karma Stages */
+.karma-stages {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.stage-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stage-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.stage-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+}
+
+.stage-card p {
+    opacity: 0.9;
+    margin-bottom: 1rem;
+}
+
+.stage-progress {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* Quick Access Buttons */
+.karma-quick-access {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.karma-simulator-btn, .karma-quiz-btn {
+    background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.karma-simulator-btn:hover, .karma-quiz-btn:hover {
+    transform: scale(1.05);
+}
+
+/* Soul Display */
+.soul-display {
+    text-align: center;
+    margin: 2rem 0;
+    padding: 2rem;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0.05) 100%);
+    border-radius: 20px;
+}
+
+.soul-avatar {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.3) 100%);
+    border: 3px solid rgba(255,255,255,0.5);
+}
+
+.soul-core {
+    font-size: 3rem;
+    z-index: 2;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.karma-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.karma-particle {
+    position: absolute;
+    font-size: 1.2rem;
+    opacity: 0.8;
+    animation: float 3s ease-in-out infinite;
+}
+
+.karma-particle:nth-child(1) { top: 10%; left: 20%; animation-delay: 0s; }
+.karma-particle:nth-child(2) { top: 30%; right: 15%; animation-delay: 0.5s; }
+.karma-particle:nth-child(3) { bottom: 25%; left: 10%; animation-delay: 1s; }
+.karma-particle:nth-child(4) { bottom: 15%; right: 25%; animation-delay: 1.5s; }
+
+.soul-status {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    margin-top: 1rem;
+}
+
+/* Karma Types Grid */
+.karma-types-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.karma-type-card {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-left: 4px solid #ccc;
+}
+
+.karma-type-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.karma-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.karma-type-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.karma-type-card p {
+    color: #666;
+    line-height: 1.4;
+    margin-bottom: 0.5rem;
+}
+
+.karma-type-card small {
+    color: #888;
+    font-style: italic;
+}
+
+/* Karma Interaction */
+.karma-interaction {
+    background: linear-gradient(135deg, rgba(255, 165, 0, 0.1), rgba(255, 140, 0, 0.1));
+    padding: 2rem;
+    border-radius: 12px;
+    margin: 2rem 0;
+    border: 1px solid rgba(255, 140, 0, 0.3);
+}
+
+.karma-interaction h3 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+.scenario {
+    text-align: center;
+}
+
+.scenario p {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.scenario button {
+    background: #8B4513;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    margin: 0 0.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+}
+
+.scenario button:hover {
+    background: #A0522D;
+}
+
+.scenario button:first-of-type {
+    background: #dc3545;
+}
+
+.scenario button:first-of-type:hover {
+    background: #c82333;
+}
+
+.scenario button:last-of-type {
+    background: #28a745;
+}
+
+.scenario button:last-of-type:hover {
+    background: #218838;
+}
+
+/* Reset Soul Button */
+.reset-soul-btn {
+    display: block;
+    margin: 2rem auto;
+    background: linear-gradient(135deg, #6c757d, #495057);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.reset-soul-btn:hover {
+    transform: scale(1.05);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(5deg); }
+}
+
+@keyframes karmaAttach {
+    0% { transform: scale(0) rotate(0deg); opacity: 0; }
+    50% { transform: scale(1.2) rotate(180deg); opacity: 1; }
+    100% { transform: scale(1) rotate(360deg); opacity: 0.8; }
+}
+
+/* Responsive Design for Karma */
+@media (max-width: 768px) {
+    .karma-types-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .karma-quick-access {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .karma-simulator-btn, .karma-quiz-btn {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .soul-avatar {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .soul-core {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .karma-header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .scenario button {
+        display: block;
+        width: 100%;
+        margin: 0.5rem 0;
+    }
+    
+    .karma-interaction {
+        padding: 1rem;
+    }
+}
