@@ -8,14 +8,20 @@
     <!-- PWA Meta Tags -->
     <meta name="theme-color" content="#8B4513">
     <meta name="description" content="Learn Jainism through interactive stories, quizzes, and games">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Jinasaraswati">
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- Manifest -->
     <link rel="manifest" href="manifest.json">
+    
+    <!-- Icons -->
+    <link rel="icon" type="image/png" sizes="192x192" href="images/icon-192.png">
+    <link rel="apple-touch-icon" href="images/icon-192.png">
     
     <!-- Styles -->
     <link rel="stylesheet" href="css/styles.css">
-    
-    <!-- Icons -->
-    <link rel="icon" type="image/png" sizes="192x192" href="images/icons/icon-192x192.png">
-    <link rel="apple-touch-icon" href="images/icons/icon-192x192.png">
 </head>
 <body>
     <div id="app">
@@ -146,18 +152,90 @@
     <script src="js/app.js"></script>
     
     <!-- PWA Registration -->
+    <!-- Enhanced PWA Registration -->
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('sw.js')
+                navigator.serviceWorker.register('/Jainism/sw.js')
                     .then((registration) => {
-                        console.log('SW registered: ', registration);
+                        console.log('✅ SW registered successfully', registration);
+                        
+                        // Check for updates
+                        registration.addEventListener('updatefound', () => {
+                            console.log('🔄 SW update found');
+                            const newWorker = registration.installing;
+                            newWorker.addEventListener('statechange', () => {
+                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                    console.log('🆕 New content available, page will refresh');
+                                    window.location.reload();
+                                }
+                            });
+                        });
                     })
                     .catch((registrationError) => {
-                        console.log('SW registration failed: ', registrationError);
+                        console.log('❌ SW registration failed:', registrationError);
                     });
             });
         }
+        
+        // Enhanced install prompt
+        let deferredPrompt;
+        let installButton;
+        
+        window.addEventListener('beforeinstallprompt', (e) => {
+            console.log('💾 Install prompt triggered');
+            e.preventDefault();
+            deferredPrompt = e;
+            
+            // Show custom install button
+            showInstallButton();
+        });
+        
+        function showInstallButton() {
+            if (document.querySelector('.install-prompt')) return;
+            
+            installButton = document.createElement('div');
+            installButton.className = 'install-prompt show';
+            installButton.innerHTML = `
+                <div>
+                    <strong>📱 Install Jinasaraswati</strong>
+                    <p>Install this app for a better experience</p>
+                </div>
+                <div>
+                    <button onclick="installApp()">Install</button>
+                    <button onclick="hideInstallPrompt()">×</button>
+                </div>
+            `;
+            document.body.appendChild(installButton);
+        }
+        
+        function installApp() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('✅ User accepted install');
+                    } else {
+                        console.log('❌ User dismissed install');
+                    }
+                    deferredPrompt = null;
+                    hideInstallPrompt();
+                });
+            }
+        }
+        
+        function hideInstallPrompt() {
+            if (installButton) {
+                installButton.remove();
+            }
+        }
+        
+        window.addEventListener('appinstalled', () => {
+            console.log('🎉 PWA was installed successfully');
+            hideInstallPrompt();
+            deferredPrompt = null;
+        });
     </script>
 </body>
+
 </html>
