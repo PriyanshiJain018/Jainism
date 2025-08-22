@@ -1,5 +1,8 @@
 // js/app.js
+// js/app.js - Add this at the top
+let currentLanguage = 'en'; // Make sure this is globally available
 
+// Rest of your existing app.js code...
 // App initialization
 document.addEventListener('DOMContentLoaded', function() {
     // Show loading screen
