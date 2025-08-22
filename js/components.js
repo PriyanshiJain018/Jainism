@@ -1,4 +1,4 @@
-// js/components.js - Enhanced version with professional map interface and minigames
+// js/components.js - Fixed version without variable conflicts
 
 const universeData = [
     {
@@ -267,11 +267,11 @@ function showUniverseContent(universe) {
     if (universe.id === 4) {
         showKarmaMapInterface();
     } else {
-        alert(`Opening ${t(universe.name)}! (Navigation coming soon)`);
+        showNotification(`Opening ${t(universe.name)}! (Navigation coming soon)`, 'info');
     }
 }
 
-// NEW: Professional Map Interface
+// Professional Map Interface
 function showKarmaMapInterface() {
     const mainContent = document.querySelector('.main-content');
     mainContent.innerHTML = `
@@ -362,7 +362,7 @@ function createLessonNodes() {
     }).join('');
 }
 
-// NEW: Lesson and Minigame Functions
+// Lesson and Minigame Functions
 function openLesson(lessonId, type) {
     const lesson = lessonMap.find(l => l.id === lessonId);
     if (!lesson) return;
@@ -405,8 +405,6 @@ function openLessonContent(lesson) {
 }
 
 function openMinigame(lesson) {
-    const mainContent = document.querySelector('.main-content');
-    
     switch(lesson.id) {
         case 'minigame1':
             showKarmaCatcherGame(lesson);
@@ -422,7 +420,7 @@ function openMinigame(lesson) {
     }
 }
 
-// NEW: Karma Catcher Minigame
+// Karma Catcher Minigame
 function showKarmaCatcherGame(lesson) {
     const mainContent = document.querySelector('.main-content');
     mainContent.innerHTML = `
@@ -535,7 +533,7 @@ function endGame() {
     `;
 }
 
-// NEW: Karma Flow Simulator
+// Karma Flow Simulator
 function showKarmaFlowSimulator(lesson) {
     const mainContent = document.querySelector('.main-content');
     mainContent.innerHTML = `
@@ -560,6 +558,11 @@ function showKarmaFlowSimulator(lesson) {
             </div>
         </div>
     `;
+}
+
+function showClassificationChallenge(lesson) {
+    showNotification('Classification Challenge coming soon!', 'info');
+    showKarmaMapInterface();
 }
 
 function createKarmaParticle(type, timer, intensity) {
@@ -687,8 +690,11 @@ function getLessonContent(lessonId) {
         'jnanavarana': {
             en: 'Jñānāvaraṇa Karma obscures the soul\'s infinite knowledge. Like a cloth covering a deity\'s face, this karma prevents clear understanding and wisdom.',
             hi: 'ज्ञानावरण कर्म आत्मा के अनंत ज्ञान को आवृत करता है। देवता के चेहरे को ढकने वाले कपड़े की तरह, यह कर्म स्पष्ट समझ और बुद्धि को रोकता है।'
+        },
+        'darshanavarana': {
+            en: 'Darśanāvaraṇa Karma blocks the soul\'s perception and spiritual insight. Like a gatekeeper preventing entry, this karma obstructs our spiritual vision.',
+            hi: 'दर्शनावरण कर्म आत्मा के दर्शन और आध्यात्मिक अंतर्दृष्टि को अवरुद्ध करता है। द्वारपाल की तरह, यह कर्म हमारी आध्यात्मिक दृष्टि को बाधित करता है।'
         }
-        // Add more content for other lessons...
     };
     
     return content[lessonId] ? content[lessonId][currentLanguage] : 'Lesson content coming soon...';
@@ -710,13 +716,6 @@ function completeMinigame(gameId) {
         showNotification(t('notifications.minigameComplete'), 'success');
     }
     showKarmaMapInterface();
-}
-
-function switchLanguage(lang) {
-    currentLanguage = lang;
-    if (userData.currentView === 'map') {
-        showKarmaMapInterface();
-    }
 }
 
 // Update existing functions
@@ -760,63 +759,4 @@ function goBackToUniverses() {
     location.reload();
 }
 
-// Install prompt functionality (existing code)
-let deferredPrompt;
-let installPromptEl;
-
-function initializeInstallPrompt() {
-    installPromptEl = document.createElement('div');
-    installPromptEl.className = 'install-prompt';
-    installPromptEl.innerHTML = `
-        <div>
-            <strong>Install Jinasaraswati</strong>
-            <p>Install this app on your device for better experience</p>
-        </div>
-        <div>
-            <button id="install-btn">Install</button>
-            <button class="close-btn" id="close-install">×</button>
-        </div>
-    `;
-    
-    document.body.appendChild(installPromptEl);
-    
-    const installBtn = document.getElementById('install-btn');
-    const closeBtn = document.getElementById('close-install');
-    
-    if (installBtn) installBtn.addEventListener('click', installApp);
-    if (closeBtn) closeBtn.addEventListener('click', () => {
-        installPromptEl.classList.remove('show');
-    });
-}
-
-function installApp() {
-    if (deferredPrompt) {
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.then((choiceResult) => {
-            if (choiceResult.outcome === 'accepted') {
-                console.log('User accepted the install prompt');
-            }
-            deferredPrompt = null;
-            installPromptEl.classList.remove('show');
-        });
-    }
-}
-
-window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-    
-    setTimeout(() => {
-        if (installPromptEl) {
-            installPromptEl.classList.add('show');
-        }
-    }, 5000);
-});
-
-window.addEventListener('appinstalled', () => {
-    console.log('PWA was installed');
-    if (installPromptEl) {
-        installPromptEl.remove();
-    }
-    deferredPrompt = null;
-});
+// Note: Install prompt handling is now in app.js to avoid conflicts
