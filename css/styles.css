@@ -2335,3 +2335,758 @@ body {
         align-items: center;
     }
 }
+
+/* =================================================================
+   PROFESSIONAL MAP INTERFACE & MINIGAMES STYLES
+   ================================================================= */
+
+/* Map Container */
+.karma-map-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: white;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.map-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.map-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(45deg, #FFD700, #FFA500);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Language Switcher */
+.language-switcher {
+    display: flex;
+    gap: 10px;
+    background: rgba(255,255,255,0.1);
+    padding: 5px;
+    border-radius: 25px;
+    backdrop-filter: blur(10px);
+}
+
+.lang-btn {
+    padding: 8px 16px;
+    border: 2px solid transparent;
+    background: transparent;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.lang-btn:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+.lang-btn.active {
+    background: rgba(255,255,255,0.2);
+    border-color: rgba(255,255,255,0.5);
+    box-shadow: 0 2px 10px rgba(255,255,255,0.2);
+}
+
+/* Stats Panel */
+.stats-panel {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin: 30px 0;
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(255,255,255,0.1);
+    padding: 20px 25px;
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255,255,255,0.2);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.stat-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+}
+
+.stat-icon {
+    font-size: 2rem;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.stat-info {
+    text-align: left;
+}
+
+.stat-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #FFD700;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    margin-top: 4px;
+    color: #E0E0E0;
+}
+
+/* Journey Title */
+.journey-title {
+    text-align: center;
+    margin: 40px 0 30px;
+}
+
+.journey-title h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #FFD700;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Lesson Map */
+.lesson-map {
+    position: relative;
+    height: 80vh;
+    min-height: 600px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 25px;
+    margin: 20px 0;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: inset 0 0 50px rgba(255,255,255,0.05);
+}
+
+.connection-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+}
+
+/* Lesson Nodes */
+.lesson-node {
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 2;
+    border: 4px solid rgba(255,255,255,0.3);
+    transform: translate(-50%, -50%);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+
+.lesson-node:hover:not(.locked) {
+    transform: translate(-50%, -50%) scale(1.15);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+    border-color: rgba(255,255,255,0.6);
+    z-index: 10;
+}
+
+.lesson-node.locked {
+    opacity: 0.4;
+    cursor: not-allowed;
+    background: #7f8c8d !important;
+    filter: grayscale(100%);
+}
+
+.lesson-node.completed {
+    border-color: #27AE60;
+    box-shadow: 0 0 30px rgba(39,174,96,0.6), 0 8px 25px rgba(0,0,0,0.2);
+    animation: completedPulse 3s ease-in-out infinite;
+}
+
+.lesson-node.minigame {
+    border-style: dashed;
+    border-width: 3px;
+    animation: minigamePulse 2s ease-in-out infinite;
+}
+
+.node-icon {
+    font-size: 2rem;
+    margin-bottom: 8px;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+    line-height: 1;
+}
+
+.node-title {
+    font-size: 0.75rem;
+    text-align: center;
+    position: absolute;
+    bottom: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    background: rgba(0,0,0,0.8);
+    padding: 8px 12px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+    font-weight: 500;
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.completion-star {
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    font-size: 1.5rem;
+    animation: starTwinkle 2s ease-in-out infinite;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.minigame-indicator {
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    font-size: 1.2rem;
+    background: rgba(0,0,0,0.8);
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #F39C12;
+    animation: gameIndicatorPulse 1.5s ease-in-out infinite;
+}
+
+/* Lesson Content */
+.lesson-content, .minigame-content {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: white;
+}
+
+.lesson-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.back-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.1);
+    border: 2px solid rgba(255,255,255,0.2);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    backdrop-filter: blur(10px);
+}
+
+.back-btn:hover {
+    background: rgba(255,255,255,0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.lesson-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(45deg, #FFD700, #FFA500);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Professional Visualizations */
+.professional-visualization {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 350px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+    border-radius: 25px;
+    margin: 30px 0;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255,255,255,0.2);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+}
+
+.karma-svg {
+    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.2));
+}
+
+.generic-visual {
+    width: 300px;
+    height: 300px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.visual-icon {
+    font-size: 4rem;
+    opacity: 0.9;
+    filter: drop-shadow(0 3px 6px rgba(0,0,0,0.3));
+}
+
+.lesson-body {
+    background: rgba(255,255,255,0.08);
+    border-radius: 25px;
+    padding: 40px;
+    margin-top: 30px;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.lesson-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 30px;
+    color: #E0E0E0;
+}
+
+.complete-btn {
+    background: linear-gradient(135deg, #27AE60, #2ECC71);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 30px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 6px 20px rgba(39,174,96,0.3);
+}
+
+.complete-btn:hover {
+    background: linear-gradient(135deg, #2ECC71, #27AE60);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(39,174,96,0.4);
+}
+
+/* Minigame Styles */
+.minigame-container {
+    background: rgba(255,255,255,0.08);
+    border-radius: 25px;
+    padding: 40px;
+    margin-top: 30px;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.game-header h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #FFD700;
+}
+
+.game-stats {
+    display: flex;
+    gap: 30px;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.game-stats div {
+    background: rgba(255,255,255,0.1);
+    padding: 10px 20px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+}
+
+.start-game-btn {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: linear-gradient(135deg, #E74C3C, #C0392B);
+    color: white;
+    border: none;
+    padding: 25px 50px;
+    border-radius: 30px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin: 50px auto;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 8px 25px rgba(231,76,60,0.3);
+}
+
+.start-game-btn:hover {
+    background: linear-gradient(135deg, #C0392B, #E74C3C);
+    transform: scale(1.05) translateY(-3px);
+    box-shadow: 0 12px 35px rgba(231,76,60,0.4);
+}
+
+.scenario-container {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.scenario-text {
+    font-size: 1.4rem;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    padding: 30px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #F0F0F0;
+}
+
+.answer-options {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.option-btn {
+    background: linear-gradient(135deg, #3498DB, #2980B9);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+    font-weight: 600;
+    min-width: 200px;
+    box-shadow: 0 4px 15px rgba(52,152,219,0.3);
+}
+
+.option-btn:hover {
+    background: linear-gradient(135deg, #2980B9, #3498DB);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(52,152,219,0.4);
+}
+
+.game-end {
+    text-align: center;
+    padding: 40px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+}
+
+.game-end h3 {
+    font-size: 2rem;
+    color: #FFD700;
+    margin-bottom: 20px;
+}
+
+/* Karma Flow Simulator */
+.flow-simulator {
+    background: rgba(255,255,255,0.08);
+    border-radius: 25px;
+    padding: 40px;
+    margin-top: 30px;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.karma-particles-display {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 40px 0;
+}
+
+.karma-particle-container {
+    background: rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 25px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.karma-particle-container:hover {
+    transform: translateY(-5px);
+}
+
+.particle-visual {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    color: white;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    border: 3px solid rgba(255,255,255,0.3);
+}
+
+.particle-icon {
+    font-size: 2rem;
+    margin-bottom: 5px;
+}
+
+.particle-info {
+    font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.particle-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.action-btn {
+    background: linear-gradient(135deg, #9B59B6, #8E44AD);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(155,89,182,0.3);
+}
+
+.action-btn:hover {
+    background: linear-gradient(135deg, #8E44AD, #9B59B6);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(155,89,182,0.4);
+}
+
+/* Animations */
+@keyframes completedPulse {
+    0%, 100% { 
+        box-shadow: 0 0 30px rgba(39,174,96,0.6), 0 8px 25px rgba(0,0,0,0.2);
+    }
+    50% { 
+        box-shadow: 0 0 40px rgba(39,174,96,0.8), 0 12px 35px rgba(0,0,0,0.3);
+    }
+}
+
+@keyframes minigamePulse {
+    0%, 100% { 
+        opacity: 1;
+        border-color: rgba(255,255,255,0.3);
+    }
+    50% { 
+        opacity: 0.8;
+        border-color: rgba(255,255,255,0.6);
+    }
+}
+
+@keyframes starTwinkle {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(1.2) rotate(180deg); }
+}
+
+@keyframes gameIndicatorPulse {
+    0%, 100% { 
+        transform: scale(1);
+        border-color: #F39C12;
+    }
+    50% { 
+        transform: scale(1.1);
+        border-color: #E67E22;
+    }
+}
+
+@keyframes pulse-animation {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+}
+
+@keyframes veil-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+@keyframes block-animation {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+}
+
+.pulse-animation {
+    animation: pulse-animation 3s ease-in-out infinite;
+}
+
+.veil-float {
+    animation: veil-float 4s ease-in-out infinite;
+}
+
+.block-animation {
+    animation: block-animation 2s ease-in-out infinite;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .stats-panel {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .lesson-node {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .node-icon {
+        font-size: 1.8rem;
+    }
+    
+    .node-title {
+        font-size: 0.7rem;
+        max-width: 120px;
+    }
+}
+
+@media (max-width: 768px) {
+    .karma-map-container {
+        padding: 15px;
+    }
+    
+    .map-header h1 {
+        font-size: 2rem;
+    }
+    
+    .lesson-map {
+        height: 70vh;
+        min-height: 500px;
+    }
+    
+    .lesson-node {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .node-icon {
+        font-size: 1.5rem;
+    }
+    
+    .node-title {
+        font-size: 0.6rem;
+        max-width: 100px;
+        bottom: -30px;
+    }
+    
+    .answer-options {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .option-btn {
+        min-width: 250px;
+    }
+    
+    .karma-particles-display {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .scenario-text {
+        font-size: 1.2rem;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .map-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .stats-panel {
+        gap: 15px;
+    }
+    
+    .stat-item {
+        padding: 15px 20px;
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .lesson-node {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .node-icon {
+        font-size: 1.3rem;
+    }
+    
+    .completion-star {
+        font-size: 1.2rem;
+        top: -8px;
+        right: -8px;
+    }
+    
+    .minigame-indicator {
+        width: 24px;
+        height: 24px;
+        font-size: 1rem;
+    }
+    
+    .professional-visualization {
+        min-height: 250px;
+        margin: 20px 0;
+    }
+    
+    .karma-svg {
+        width: 250px;
+        height: 250px;
+    }
+}
