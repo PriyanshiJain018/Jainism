@@ -1,15 +1,28 @@
-// js/translations.js - Enhanced with professional map interface translations
+// js/translations.js - Complete version with all required keys
 
 const translations = {
     en: {
-        // Existing translations...
+        // Universe navigation
+        'universes.prathamanuyoga.name': 'Prathamānuyoga',
+        'universes.prathamanuyoga.subtitle': 'Stories & Biographies',
+        'universes.prathamanuyoga.description': 'Lives and teachings of Tīrthaṅkaras and great souls',
+        
+        'universes.karananuyoga.name': 'Karaṇānuyoga',
+        'universes.karananuyoga.subtitle': 'Cosmology & Geography',
+        'universes.karananuyoga.description': 'Structure of the universe and cosmic principles',
+        
+        'universes.charananuyoga.name': 'Caraṇānuyoga',
+        'universes.charananuyoga.subtitle': 'Conduct & Ethics',
+        'universes.charananuyoga.description': 'Rules of conduct for spiritual aspirants',
+        
         'universes.dravyanuyoga.name': 'Dravyānuyoga',
         'universes.dravyanuyoga.subtitle': 'Metaphysical Reality',
-        'universes.dravyanuyoga.description': 'Explore the fundamental nature of souls, matter, and karma',
+        'universes.dravyanuyoga.description': 'Fundamental nature of souls, matter, and karma',
+        
         'universes.stages': 'Stages: {{count}}',
         'universes.locked': 'Locked',
 
-        // NEW: Professional Map Interface
+        // Karma Universe
         'karma.universe.title': 'Karma Universe',
         'karma.journey.title': 'Your Spiritual Journey',
         
@@ -29,7 +42,7 @@ const translations = {
         'actions.anger': 'Get Angry',
         'actions.charity': 'Give Charity',
         
-        // Karma Types (Enhanced)
+        // Karma Types
         'karma.jnanavarana': 'Jñānāvaraṇa Karma',
         'karma.darshanavarana': 'Darśanāvaraṇa Karma',
         'karma.vedaniya': 'Vedanīya Karma',
@@ -96,14 +109,27 @@ const translations = {
     },
     
     hi: {
-        // Existing translations...
+        // Universe navigation
+        'universes.prathamanuyoga.name': 'प्रथमानुयोग',
+        'universes.prathamanuyoga.subtitle': 'कथाएं और जीवनियां',
+        'universes.prathamanuyoga.description': 'तीर्थंकरों और महापुरुषों के जीवन और शिक्षाएं',
+        
+        'universes.karananuyoga.name': 'करणानुयोग',
+        'universes.karananuyoga.subtitle': 'ब्रह्मांड विज्ञान',
+        'universes.karananuyoga.description': 'ब्रह्मांड की संरचना और लौकिक सिद्धांत',
+        
+        'universes.charananuyoga.name': 'चरणानुयोग',
+        'universes.charananuyoga.subtitle': 'आचरण और नीति',
+        'universes.charananuyoga.description': 'आध्यात्मिक साधकों के लिए आचरण के नियम',
+        
         'universes.dravyanuyoga.name': 'द्रव्यानुयोग',
         'universes.dravyanuyoga.subtitle': 'तत्त्वमीमांसा',
-        'universes.dravyanuyoga.description': 'आत्मा, पुद्गल और कर्म की मौलिक प्रकृति का अन्वेषण करें',
+        'universes.dravyanuyoga.description': 'आत्मा, पुद्गल और कर्म की मौलिक प्रकृति',
+        
         'universes.stages': 'चरण: {{count}}',
         'universes.locked': 'बंद',
 
-        // NEW: Professional Map Interface
+        // Karma Universe
         'karma.universe.title': 'कर्म विश्व',
         'karma.journey.title': 'आपकी आध्यात्मिक यात्रा',
         
@@ -123,7 +149,7 @@ const translations = {
         'actions.anger': 'गुस्सा करें',
         'actions.charity': 'दान दें',
         
-        // Karma Types (Enhanced)
+        // Karma Types
         'karma.jnanavarana': 'ज्ञानावरण कर्म',
         'karma.darshanavarana': 'दर्शनावरण कर्म',
         'karma.vedaniya': 'वेदनीय कर्म',
@@ -192,23 +218,37 @@ const translations = {
 
 // Enhanced t function with placeholder support
 function t(key, params = {}) {
-    const keys = key.split('.');
-    let value = translations[currentLanguage];
-    
-    for (const k of keys) {
-        if (value && typeof value === 'object' && k in value) {
-            value = value[k];
-        } else {
-            return key; // Return key if translation not found
+    try {
+        const keys = key.split('.');
+        let value = translations[currentLanguage] || translations['en'];
+        
+        for (const k of keys) {
+            if (value && typeof value === 'object' && k in value) {
+                value = value[k];
+            } else {
+                // Fallback to English if Hindi translation not found
+                value = translations['en'];
+                for (const k of keys) {
+                    if (value && typeof value === 'object' && k in value) {
+                        value = value[k];
+                    } else {
+                        return key; // Return key if translation not found in any language
+                    }
+                }
+                break;
+            }
         }
+        
+        // Handle placeholders like {{count}}, {{amount}}, etc.
+        if (typeof value === 'string' && params) {
+            return value.replace(/\{\{(\w+)\}\}/g, (match, paramKey) => {
+                return params[paramKey] !== undefined ? params[paramKey] : match;
+            });
+        }
+        
+        return value || key;
+    } catch (error) {
+        console.warn('Translation error for key:', key, error);
+        return key;
     }
-    
-    // Handle placeholders like {{count}}, {{amount}}, etc.
-    if (typeof value === 'string' && params) {
-        return value.replace(/\{\{(\w+)\}\}/g, (match, paramKey) => {
-            return params[paramKey] !== undefined ? params[paramKey] : match;
-        });
-    }
-    
-    return value || key;
 }
