@@ -1,4 +1,4 @@
-// js/translations.js - Complete version with all required keys
+// js/translations.js - Complete version with all required keys for fixing
 
 const translations = {
     en: {
