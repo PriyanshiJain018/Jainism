@@ -2044,3 +2044,294 @@ body {
         grid-template-columns: 1fr;
     }
 }
+
+/* Stage 2 Specific Styles */
+.stage2-intro {
+    text-align: center;
+    padding: 3rem;
+    background: linear-gradient(135deg, rgba(139, 69, 19, 0.1), rgba(160, 82, 45, 0.1));
+    border-radius: 20px;
+    margin: 2rem 0;
+}
+
+.dynamic-soul {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 2rem auto;
+}
+
+.soul-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    z-index: 2;
+}
+
+.orbiting-karma {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #FF6B6B;
+    border-radius: 50%;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: orbit 4s linear infinite;
+}
+
+@keyframes orbit {
+    from { transform: translateX(-50%) rotate(0deg) translateX(60px) rotate(0deg); }
+    to { transform: translateX(-50%) rotate(360deg) translateX(60px) rotate(-360deg); }
+}
+
+.job-analogy {
+    text-align: center;
+    padding: 3rem;
+    background: #f8f9fa;
+    border-radius: 20px;
+    margin: 2rem 0;
+}
+
+.contract-visual {
+    margin: 2rem 0;
+}
+
+.contract-signing {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    font-size: 3rem;
+}
+
+.karma-state-lesson {
+    padding: 2rem;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    margin: 2rem 0;
+}
+
+.state-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.state-badge {
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.state-visual-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    border-radius: 15px;
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.bandha-visual, .sattva-visual, .udaya-visual {
+    position: relative;
+    text-align: center;
+}
+
+.soul-particle {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.karma-particle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: inline-block;
+    font-size: 1.5rem;
+    line-height: 30px;
+    text-align: center;
+    color: white;
+    margin: 0.5rem;
+}
+
+.karma-particle.binding {
+    animation: bindingAnimation 3s ease-in-out infinite;
+}
+
+.karma-particle.dormant {
+    opacity: 0.6;
+    animation: dormantPulse 2s ease-in-out infinite;
+}
+
+.karma-particle.active {
+    animation: activeExplosion 1s ease-in-out infinite;
+}
+
+@keyframes bindingAnimation {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(20px); }
+}
+
+@keyframes dormantPulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 0.9; }
+}
+
+@keyframes activeExplosion {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+.karma-states-combo {
+    padding: 2rem;
+}
+
+.states-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.state-card {
+    padding: 2rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.interactive-demo {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 12px;
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.demo-controls {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin: 1rem 0;
+}
+
+.demo-btn {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: transform 0.3s ease;
+}
+
+.demo-btn.increase {
+    background: #e74c3c;
+    color: white;
+}
+
+.demo-btn.decrease {
+    background: #27ae60;
+    color: white;
+}
+
+.demo-btn:hover {
+    transform: translateY(-2px);
+}
+
+.karma-timer {
+    margin: 2rem auto;
+    max-width: 300px;
+}
+
+.timer-display {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.timer-bar {
+    height: 20px;
+    background: #e9ecef;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.timer-fill {
+    height: 100%;
+    background: #3498db;
+    transition: all 0.5s ease;
+    border-radius: 10px;
+}
+
+.stage2-summary {
+    text-align: center;
+    padding: 3rem;
+}
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.summary-state {
+    color: white;
+    padding: 1rem;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.state-number {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.final-message {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 12px;
+    margin: 2rem 0;
+}
+
+.hope-message {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    margin: 2rem 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .karma-showcase {
+        grid-template-columns: 1fr;
+    }
+    
+    .states-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .demo-controls {
+        flex-direction: column;
+        align-items: center;
+    }
+}
